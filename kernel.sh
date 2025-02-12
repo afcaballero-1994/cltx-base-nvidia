@@ -4,6 +4,10 @@ set -ouex pipefail
 
 dnf update -y
 
+dnf install epel-release -y
+dnf config-manager --set-enabled crb -y
+
+
 dnf install -y \
     wget pkgconf-pkg-config libstdc++\
     kernel-devel \
