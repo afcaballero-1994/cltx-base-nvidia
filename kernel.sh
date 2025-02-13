@@ -46,7 +46,7 @@ chmod +x NVIDIA-Linux-x86_64-570.86.16.run
     --kernel-name=$kver
 
 rm -f /NVIDIA-Linux-x86_64-570.86.16.run
-dracut -vf --kver=$kver
+dracut -vf --kver=$kver --reproducible --zstd --no-hostonly
 
 #dracut -vf /usr/lib/modules/$kver/initramfs.img $kver
 
