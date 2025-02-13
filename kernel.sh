@@ -11,12 +11,12 @@ dnf config-manager --set-enabled crb -y
 dnf install -y \
     wget pkgconf-pkg-config libstdc++\
     kernel-devel \
-    kernel-headers \
+    kernel-headers xorg-x11-server-Xorg xorg-x11-server-common\
     dkms xorg-x11-proto-devel\
     vulkan libglvnd libglvnd-devel libglvnd-egl\
     vulkan-tools \
     vulkan-headers \
-    vulkan-loader-devel
+    vulkan-loader-devel xorg-x11-drivers xorg-x11-server-Xwayland xorg-x11-server-utils
 
 touch \
     /etc/modprobe.d/nouveau-blacklist.conf
@@ -49,5 +49,7 @@ rm -f /NVIDIA-Linux-x86_64-570.86.16.run
 dracut -f --kver=$kver
 
 #dracut -vf /usr/lib/modules/$kver/initramfs.img $kver
+
+rpm-ostree kargs --append=nvidia-drm.modeset=1 --append=initcall_blacklist=simpledrm_platform_driver_init
 
 dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q) -y
