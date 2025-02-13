@@ -46,10 +46,10 @@ chmod +x NVIDIA-Linux-x86_64-570.86.16.run
     --kernel-name=$kver
 
 rm -f /NVIDIA-Linux-x86_64-570.86.16.run
-dracut -f --kver=$kver
+dracut -vf --kver=$kver
 
 #dracut -vf /usr/lib/modules/$kver/initramfs.img $kver
 
-rpm-ostree kargs --append=nvidia-drm.modeset=1 --append=initcall_blacklist=simpledrm_platform_driver_init
+nvidia-xconfig
 
 dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q) -y
