@@ -24,6 +24,7 @@ dnf config-manager --add-repo "https://developer.download.nvidia.com/compute/cud
 dnf clean expire-cache
 
 dnf -y install egl-gbm egl-wayland --repo=cuda-rhel9-x86_64 --nogpgcheck
+sudo dnf module install nvidia-driver:latest --nogpgcheck
 
 touch \
     /etc/modprobe.d/nouveau-blacklist.conf
@@ -37,22 +38,8 @@ echo "options nouveau modeset=0" | tee -a \
 
 kver=$(cd /usr/lib/modules && echo * | awk '{print $NF}')
 
-dracut -f --kver=$kver --no-hostonly
+#dracut -f --kver=$kver --no-hostonly
 
-wget \
-    https://us.download.nvidia.com/XFree86/Linux-x86_64/570.86.16/NVIDIA-Linux-x86_64-570.86.16.run
-
-chmod +x NVIDIA-Linux-x86_64-570.86.16.run
-
-
-
-/NVIDIA-Linux-x86_64-570.86.16.run\
-    --silent --run-nvidia-xconfig --dkms \
-    --kernel-source-path /usr/src/kernels/$kver \
-    --kernel-module-type=proprietary \
-    --kernel-name=$kver
-
-rm -f /NVIDIA-Linux-x86_64-570.86.16.run
 dracut -vf --kver=$kver --reproducible --zstd --no-hostonly
 
 dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q) -y
