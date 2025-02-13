@@ -10,7 +10,7 @@ dnf config-manager --set-enabled crb -y
 
 dnf install -y \
     wget pkgconf-pkg-config libstdc++\
-    kernel-devel egl-gbm egl-utils egl-wayland\
+    kernel-devel kernel-devel-matched\
     kernel-headers \
     dkms xorg-x11-proto-devel\
     vulkan libglvnd libglvnd-devel libglvnd-egl\
@@ -31,7 +31,6 @@ echo "options nouveau modeset=0" | tee -a \
 
 kver=$(cd /usr/lib/modules && echo * | awk '{print $NF}')
 
-
 dracut -f --kver=$kver --reproducible --zstd --no-hostonly
 
 wget \
@@ -39,7 +38,14 @@ wget \
 
 chmod +x NVIDIA-Linux-x86_64-570.86.16.run
 
-dracut -vf --kver=$kver --reproducible --zstd --no-hostonly
 
+/NVIDIA-Linux-x86_64-570.86.16.run\
+    --silent --run-nvidia-xconfig --dkms \
+    --kernel-source-path /usr/src/kernels/$kver \
+    --kernel-module-type=proprietary \
+    --kernel-name=$kver
+
+rm -f /NVIDIA-Linux-x86_64-570.86.16.run
+dracut -vf --kver=$kver --reproducible --zstd --no-hostonly
 
 dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q) -y
