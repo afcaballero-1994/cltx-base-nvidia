@@ -11,12 +11,12 @@ dnf config-manager --set-enabled crb -y
 dnf install -y \
     wget pkgconf-pkg-config libstdc++\
     kernel-devel \
-    kernel-headers xorg-x11-server-Xorg xorg-x11-server-common\
+    kernel-headers \
     dkms xorg-x11-proto-devel\
     vulkan libglvnd libglvnd-devel libglvnd-egl\
     vulkan-tools \
     vulkan-headers \
-    vulkan-loader-devel xorg-x11-drivers xorg-x11-server-Xwayland xorg-x11-server-utils
+    vulkan-loader-devel xorg-x11-server-Xwayland
 
 touch \
     /etc/modprobe.d/nouveau-blacklist.conf
