@@ -15,6 +15,7 @@ FROM quay.io/almalinuxorg/almalinux-bootc:10-kitten
 
 RUN ln -s /run /var/run
 
+
 COPY system_folder /
 COPY build.sh /tmp/build.sh
 COPY kernel.sh /tmp/kernel.sh
