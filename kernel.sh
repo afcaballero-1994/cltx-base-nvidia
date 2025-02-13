@@ -10,7 +10,7 @@ dnf config-manager --set-enabled crb -y
 
 dnf install -y \
     wget pkgconf-pkg-config libstdc++\
-    kernel-devel \
+    kernel-devel egl-gbm egl-utils egl-wayland\
     kernel-headers \
     dkms xorg-x11-proto-devel\
     vulkan libglvnd libglvnd-devel libglvnd-egl\
