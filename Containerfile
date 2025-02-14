@@ -1,5 +1,5 @@
-FROM quay.io/almalinuxorg/almalinux-bootc:10-kitten
-
+#FROM quay.io/almalinuxorg/almalinux-bootc:10-kitten
+FROM quay.io/centos-bootc/centos-bootc:stream10
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:stable
 # FROM ghcr.io/ublue-os/bluefin-nvidia:stable
