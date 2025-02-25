@@ -31,7 +31,7 @@ echo "options nouveau modeset=0" | tee -a \
 
 kver=$(cd /usr/lib/modules && echo * | awk '{print $NF}')
 
-dracut -f --kver=$kver --reproducible --zstd --no-hostonly
+dracut -f --kver=$kver --reproducible --zstd --no-hostonly /usr/lib/modules/$kver/initramfs.img $kver
 
 wget \
     https://us.download.nvidia.com/XFree86/Linux-x86_64/570.86.16/NVIDIA-Linux-x86_64-570.86.16.run
@@ -46,6 +46,6 @@ chmod +x NVIDIA-Linux-x86_64-570.86.16.run
     --kernel-name=$kver
 
 rm -f /NVIDIA-Linux-x86_64-570.86.16.run
-dracut -vf --kver=$kver --reproducible --zstd --no-hostonly
+dracut -vf --kver=$kver --reproducible --zstd --no-hostonly /usr/lib/modules/$kver/initramfs.img $kver
 
 dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q) -y

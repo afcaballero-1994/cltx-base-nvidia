@@ -23,7 +23,6 @@ COPY kernel.sh /tmp/kernel.sh
 
 
 RUN mkdir -p /var/lib/alternatives && \
-    /tmp/build.sh && \
-    ostree container commit
+    /tmp/build.sh
     
 RUN bootc container lint

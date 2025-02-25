@@ -20,4 +20,5 @@ rm -rf /var/roothome
 #rm -rf /var/!(cache)
 rm -rf /var/cache/!(rpm-ostree)/*
 rm -rf /var/tmp/*
+rm -rf /var/log/*
 dnf clean all
