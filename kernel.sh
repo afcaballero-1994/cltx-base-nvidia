@@ -33,7 +33,7 @@ kver=$(cd /usr/lib/modules && echo * | awk '{print $NF}')
 
 dracut -f --kver=$kver --reproducible --zstd --no-hostonly /usr/lib/modules/$kver/initramfs.img $kver
 
-NVIDIA_DRIVER_VERSION="570.124.04"
+NVIDIA_DRIVER_VERSION="575.51.02"
 
 wget \
     https://us.download.nvidia.com/XFree86/Linux-x86_64/$NVIDIA_DRIVER_VERSION/NVIDIA-Linux-x86_64-$NVIDIA_DRIVER_VERSION.run
